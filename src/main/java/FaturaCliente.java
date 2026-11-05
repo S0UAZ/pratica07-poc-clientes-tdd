@@ -5,34 +5,40 @@ public class FaturaCliente {
     private double valor;
 
     public FaturaCliente(int id, Cliente cliente, double valor) {
+        this.id = id;
+        this.cliente = cliente;
+        this.valor = valor;
     }
 
     public FaturaCliente(int id) {
+        this.id = id;
     }
 
     public int getId() {
-        return 0;
+        return id;
     }
 
     public Cliente getCliente() {
-        return null;
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public double getValor() {
-        return 0;
+        return valor;
     }
 
     public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public double getValorComDesconto() {
-        return 0;
+        return valor - (valor * cliente.getDesconto() / 100.0);
     }
 
     public String toString() {
-        return null;
+        return "Fatura [id=" + id + ", cliente=" + cliente + ", valor=" + valor + " ]";
     }
 }
