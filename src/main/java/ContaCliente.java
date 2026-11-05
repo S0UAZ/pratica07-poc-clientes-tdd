@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class ContaCliente {
 
     private int id;
@@ -5,41 +7,56 @@ public class ContaCliente {
     private double saldo = 0.0;
 
     public ContaCliente(int id, Cliente cliente, double saldo) {
+        this.id = id;
+        this.cliente = cliente;
+        this.saldo = saldo;
     }
 
     public ContaCliente(int id, Cliente cliente) {
+        this.id = id;
+        this.cliente = cliente;
     }
 
     public ContaCliente(int id) {
+        this.id = id;
     }
 
     public int getId() {
-        return 0;
+        return id;
     }
 
     public Cliente getCliente() {
-        return null;
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public double getSaldo() {
-        return 0;
+        return saldo;
     }
 
     public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     public String toString() {
-        return null;
+        return cliente.getNome() + "(" + cliente.getId() + ") saldo=R$" + String.format(Locale.US, "%.2f", saldo);
     }
 
     public double addDeposito(double valor) {
-        return 0;
+        saldo += valor;
+        System.out.println("Novo saldo: R$" + String.format(Locale.US, "%.2f", saldo));
+        return saldo;
     }
 
     public double subSaldo(double valor) {
-        return 0;
+        if (valor > saldo) {
+            System.out.println("Saldo insuficiente para saque de R$" + String.format(Locale.US, "%.2f", valor));
+            return saldo;
+        }
+        saldo -= valor;
+        return saldo;
     }
 }
