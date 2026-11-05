@@ -10,12 +10,8 @@ public class Cliente {
     private final String genero;
 
     public Cliente(int id, String nome, int desconto) {
-        if (id < 0) {
-            throw new IllegalArgumentException("Id não pode ser negativo.");
-        }
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome é obrigatório.");
-        }
+        validarId(id);
+        validarNome(nome);
         validarDesconto(desconto);
         this.id = id;
         this.nome = nome;
@@ -42,6 +38,18 @@ public class Cliente {
     public void setDesconto(int desconto) {
         validarDesconto(desconto);
         this.desconto = desconto;
+    }
+
+    private static void validarId(int id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("Id não pode ser negativo.");
+        }
+    }
+
+    private static void validarNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome é obrigatório.");
+        }
     }
 
     private static void validarDesconto(int desconto) {
