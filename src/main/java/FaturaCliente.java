@@ -1,6 +1,8 @@
 public class FaturaCliente {
 
-    private int id;
+    private static final double PERCENTUAL_TOTAL = 100.0;
+
+    private final int id;
     private Cliente cliente;
     private double valor;
 
@@ -35,9 +37,14 @@ public class FaturaCliente {
     }
 
     public double getValorComDesconto() {
-        return valor - (valor * cliente.getDesconto() / 100.0);
+        return valor - calcularDesconto();
     }
 
+    private double calcularDesconto() {
+        return valor * cliente.getDesconto() / PERCENTUAL_TOTAL;
+    }
+
+    @Override
     public String toString() {
         return "Fatura [id=" + id + ", cliente=" + cliente + ", valor=" + valor + " ]";
     }
