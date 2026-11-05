@@ -2,7 +2,7 @@ import java.util.Locale;
 
 public class ContaCliente {
 
-    private int id;
+    private final int id;
     private Cliente cliente;
     private double saldo = 0.0;
 
@@ -41,22 +41,31 @@ public class ContaCliente {
         this.saldo = saldo;
     }
 
+    @Override
     public String toString() {
-        return cliente.getNome() + "(" + cliente.getId() + ") saldo=R$" + String.format(Locale.US, "%.2f", saldo);
+        return identificarCliente() + " saldo=" + formatarMoeda(saldo);
     }
 
     public double addDeposito(double valor) {
         saldo += valor;
-        System.out.println("Novo saldo: R$" + String.format(Locale.US, "%.2f", saldo));
+        System.out.println("Novo saldo: " + formatarMoeda(saldo));
         return saldo;
     }
 
     public double subSaldo(double valor) {
         if (valor > saldo) {
-            System.out.println("Saldo insuficiente para saque de R$" + String.format(Locale.US, "%.2f", valor));
+            System.out.println("Saldo insuficiente para saque de " + formatarMoeda(valor));
             return saldo;
         }
         saldo -= valor;
         return saldo;
+    }
+
+    private String identificarCliente() {
+        return cliente.getNome() + "(" + cliente.getId() + ")";
+    }
+
+    private static String formatarMoeda(double valor) {
+        return "R$" + String.format(Locale.US, "%.2f", valor);
     }
 }
