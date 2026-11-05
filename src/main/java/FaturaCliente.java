@@ -1,38 +1,51 @@
 public class FaturaCliente {
 
-    private int id;
+    private static final double PERCENTUAL_TOTAL = 100.0;
+
+    private final int id;
     private Cliente cliente;
     private double valor;
 
     public FaturaCliente(int id, Cliente cliente, double valor) {
+        this.id = id;
+        this.cliente = cliente;
+        this.valor = valor;
     }
 
     public FaturaCliente(int id) {
+        this.id = id;
     }
 
     public int getId() {
-        return 0;
+        return id;
     }
 
     public Cliente getCliente() {
-        return null;
+        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public double getValor() {
-        return 0;
+        return valor;
     }
 
     public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public double getValorComDesconto() {
-        return 0;
+        return valor - calcularDesconto();
     }
 
+    private double calcularDesconto() {
+        return valor * cliente.getDesconto() / PERCENTUAL_TOTAL;
+    }
+
+    @Override
     public String toString() {
-        return null;
+        return "Fatura [id=" + id + ", cliente=" + cliente + ", valor=" + valor + " ]";
     }
 }
